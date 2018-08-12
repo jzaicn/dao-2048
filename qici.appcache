@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#VERSION 20160228145623
+#VERSION 20160228155454
 Assets/meta/globalUrlMap.js
 Assets/css/style.css
 http://engine.zuoyouxi.com/lib/1.0.7/phaser.min.js
@@ -26,7 +26,7 @@ Assets/texture/play_page.bin
 Assets/texture/hand.bin
 Assets/prefab/FallItem.bin
 Assets/prefab/score.bin
-Assets/font/华康海报体简.bin
+Assets/font/hua.bin
 Assets/atlas/fall.bin
 Assets/atlas/music.bin
 
