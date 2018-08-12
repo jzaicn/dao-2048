@@ -1,3 +1,4 @@
+@echo off
 cd %~dp0
 
 :: 获取当前目录名
@@ -6,8 +7,8 @@ set "cd_=%cd%"
 set "cd_=%cd_:*\=%"
 set "cd_tmp=%cd_:\=%"
 if not "%cd_tmp%"=="%cd_%" goto loop
-echo "%cd_%"
-pause
+::echo "%cd_%"
+::pause
 
 :: 目标路径
 set SRC_PATH=%~dp0
@@ -21,8 +22,8 @@ if "Build"=="%cd_%" goto path_error
 XCOPY /E/S/Y "%SRC_PATH%*.*" "%DST_PATH%"
 
 :end
-pause
+::pause
 
 
 :path_error
-pause
+::pause
