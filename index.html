@@ -1,100 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html manifest="qici.appcache">
 <head>
-  <meta charset="utf-8">
-  <title>2018-8-12 13:36:08</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name='viewport' content='width=device-width,user-scalable=no'>
+    <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'>
+    <meta name='apple-mobile-web-app-capable' content='yes'>
+    <meta name='apple-mobile-web-app-title' content='珍膳小游戏'>
+    <link rel='apple-touch-icon' href='http://engine.zuoyouxi.com/qici.png'>
+    <link rel='apple-touch-startup-image' href='http://engine.zuoyouxi.com/qici.png'>
 
-  <link href="style/main.css" rel="stylesheet" type="text/css">
-  <link rel="shortcut icon" href="favicon.ico">
-  <link rel="apple-touch-icon" href="meta/apple-touch-icon.png">
-  <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone 5+ -->
-  <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x920.png"  media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone, retina -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="shortcut icon" href="http://engine.zuoyouxi.com/qici.ico" />
+    <title>珍膳小游戏</title>
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="./Assets/css/style.css"/>
 
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
+    <script>
+        // The game configuration
+        var qici = {};
+        qici.config = {
+            projectName: 'catchgame',
+            gameName: '珍膳小游戏',
+            companyName: 'zhenshan',
+            bundleIdentifier: 'com.zhenshan.catchgame',
+            gameInstance: 'qc_game',
+            frameRate: {"mobile":30,"desktop":60},            
+            fixedGameSize: {"enabled":false,"width":640,"height":960},            
+            customSettings: {},
+            backgroundColor: 4671303,
+            runInBackground: true,
+            antialias: false,
+            transparent: false,
+            developerMode: false,
+            renderer: 'Auto',
+            loadingPrefab: '',
+            scene: {
+                
+            "game_playing" : "Assets/scene/game_playing.bin"
+            },
+            entryScene : 'game_playing',
+            dirtyRectangles: true,
+            loading: {
+                loadingText: 'Loading, please wait...',
+                loadingInterval: 200,
+                brightingInterval: 10,
+                blinkingCount: 5,
+                blinkingInterval: 70,
+                fadingInInterval: 400,
+                fadingOutInterval: 600
+            }
+        };
+
+ 		_pluginVariables_={}
+
+        qici.scripts = [
+            './Assets/meta/globalUrlMap.js',
+            'http://engine.zuoyouxi.com/lib/1.0.7/phaser.min.js',
+            'http://engine.zuoyouxi.com/lib/1.0.7/webfontloader.js',
+            'http://engine.zuoyouxi.com/lib/1.0.7/qc-core.js',
+            'http://engine.zuoyouxi.com/lib/qc-webgl.js',
+            // External scripts for plugins
+
+            // User scripts
+            './js/game-scripts-mini-0.0.1.js'
+        ];
+
+		// Asset count that need preload in boot
+		qici.loadingAssetCount = 4;
+    </script>
 </head>
-<body>
-  <div class="container">
-    <p style="position:absolute;left:60px;top:100px;">ContainerID: </p>
-    <div class="heading">
-      <h1 class="title">2048</h1>
-      <div class="scores-container">
-        <div class="score-container">0</div>
-        <div class="best-container">0</div>
-      </div>
+
+<body onload="qici.init();">
+    <div style="overflow:hidden;padding:0;margin:0;width:100%;height:100%;">
+        <div id="gameDiv" style="position:relative;"></div>
     </div>
-
-    <div class="above-game">
-      <p class="game-intro">999999999999</p>
-      <a class="restart-button">New Game</a>
-    </div>
-
-    <div class="game-container">
-      <div class="game-message">
-        <p></p>
-        <div class="lower">
-	        <a class="keep-playing-button">Keep going</a>
-          <a class="retry-button">Try again</a>
-        </div>
-      </div>
-
-      <div class="grid-container">
-        <div class="grid-row">
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-        </div>
-        <div class="grid-row">
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-        </div>
-        <div class="grid-row">
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-        </div>
-        <div class="grid-row">
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-        </div>
-      </div>
-
-      <div class="tile-container">
-
-      </div>
-    </div>
-
-    <p class="game-explanation">
-      <strong class="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>
-    </p>
-    <hr>
-    <p>
-    <strong class="important">Note:</strong> This site is the official version of 2048. You can play it on your phone via <a href="http://git.io/2048">http://git.io/2048.</a> All other apps or sites are derivatives or fakes, and should be used with caution.
-    </p>
-    <hr>
-    <p>
-    Created by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> and conceptually similar to <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer.</a>
-    </p>
-  </div>
-
-  <script src="js/bind_polyfill.js"></script>
-  <script src="js/classlist_polyfill.js"></script>
-  <script src="js/animframe_polyfill.js"></script>
-  <script src="js/keyboard_input_manager.js"></script>
-  <script src="js/html_actuator.js"></script>
-  <script src="js/grid.js"></script>
-  <script src="js/tile.js"></script>
-  <script src="js/local_storage_manager.js"></script>
-  <script src="js/game_manager.js"></script>
-  <script src="js/application.js"></script>
+    <script src='http://engine.zuoyouxi.com/lib/1.0.7/qc-loading.js'></script>
 </body>
+
 </html>
